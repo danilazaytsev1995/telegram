@@ -3,6 +3,9 @@ package danila_zaytsev.telegram.Service;
 
 import danila_zaytsev.telegram.Config.BotConfig;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.batch.BatchProperties;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -20,6 +23,7 @@ public class Bot extends TelegramLongPollingCommandBot {
 
     private final BotConfig config;
     private final NonCommand nonCommand;
+    private final JdbcTemplate jdbcTemplate;
 
 
     public String getBotUsername() {
@@ -30,13 +34,14 @@ public class Bot extends TelegramLongPollingCommandBot {
         return config.getToken();
     }
 
-    public Bot(BotConfig config) {
+    public Bot(BotConfig config, JdbcTemplate jdbcTemplate) {
         super();
         this.config = config;
+        this.jdbcTemplate = jdbcTemplate;
         this.nonCommand = new NonCommand();
         register(new StartCommand("start", "Старт"));
         register(new HelpCommand("help", "Помощь"));
-        register(new RegCommand("reg", "Регистрация"));
+        register(new RegCommand("reg", "Регистрация", jdbcTemplate));
         register(new MembersCommand("members", "Участники"));
     }
 
