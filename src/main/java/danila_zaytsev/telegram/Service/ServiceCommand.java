@@ -14,7 +14,7 @@ abstract class ServiceCommand extends BotCommand {
     void sendAnswer(AbsSender absSender, Long chatId, String commandName, String userName, String text) {
         SendMessage message = new SendMessage();
         //включаем поддержку режима разметки, чтобы управлять отображением текста и добавлять эмодзи
-        message.enableMarkdown(true);
+        //message.enableMarkdown(true);
         message.setChatId(chatId.toString());
         message.setText(text);
         try {
