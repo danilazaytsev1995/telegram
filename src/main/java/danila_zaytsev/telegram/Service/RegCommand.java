@@ -23,8 +23,9 @@ public class RegCommand extends ServiceCommand {
 
         if (count == 0) {
             jdbcTemplate.update("INSERT INTO members_table (telegram_id, user_name, first_name, last_name," +
-                            "talker_of_the_day, talker_of_the_month, talker_of_the_year, chat_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?);",
-                    user.getId(), user.getUserName(), user.getFirstName(), user.getLastName(), 0, 0, 0, chat.getId());
+                            "talker_of_the_day, talker_of_the_month, talker_of_the_year, chat_id) " +
+                            "VALUES(?, ?, ?, ?, ?, ?, ?, ?);", user.getId(), user.getUserName(),
+                    user.getFirstName(), user.getLastName(), 0, 0, 0, chat.getId());
 
             sendAnswer(absSender, chat.getId(), this.getCommandIdentifier(), userName,
                     "*ШТОШ...* Теперь ты участник игры *\"Болтовня\"*");

@@ -42,7 +42,7 @@ public class Bot extends TelegramLongPollingCommandBot {
         register(new StartCommand("start", "Старт"));
         register(new HelpCommand("help", "Помощь"));
         register(new RegCommand("reg", "Регистрация", jdbcTemplate));
-        register(new MembersCommand("members", "Участники"));
+        register(new MembersCommand("members", "Участники", jdbcTemplate));
     }
 
     @Override
